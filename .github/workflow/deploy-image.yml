@@ -4,7 +4,7 @@ on: push
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/doonoapp/professional_service
+  IMAGE_NAME: professional_service
 
 jobs:
   build-and-push-image:
