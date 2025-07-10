@@ -1,0 +1,26 @@
+    syntax = "proto3";
+
+    package hire;
+
+    service HireService
+    {
+        rpc SendHireRequest(HireRequest) returns (HireResponse);
+    }
+
+    message HireRequest
+    {
+        string user = 1;
+        int32 user_id = 2;
+        string from_date = 3;
+        string to_date = 4;
+        float price = 5;
+        string message = 6;
+        int32 professional_id = 7;
+        string professional_user = 8;
+    }
+
+    message HireResponse
+    {
+        bool success=1;
+        string message=2;
+    }

@@ -1,0 +1,71 @@
+syntax = "proto3";
+import "google/protobuf/field_mask.proto";
+package authuser;
+
+service CreateUsers{
+    rpc UserSignup(SignupDetails)returns(SignupResponse);
+    rpc UserLogin (LoginDetails)returns(LoginResponse);
+    rpc RefreshToken(TokenRequest)returns(LoginResponse);
+    rpc ValidateToken(ValidateRequest) returns (ValidateResponse);
+    rpc UpdateUser(UpdateRequest) returns (UpdateResponse);
+    
+}
+
+message SignupDetails{
+    string username = 1;
+    string phonenumber = 2;
+    string useremail = 3;
+    string password = 4;
+    string confirmpassword = 5;
+    bool isProfessional = 6;
+}
+message SignupResponse{
+    int64 id = 1;
+    string username = 2;
+    string phonenumber = 3;
+    string useremail = 4;
+    bool isProfessional =5;
+}
+message LoginDetails{
+    string useremail = 1;
+    string password = 2;
+}
+
+
+message ValidateRequest {
+    string token = 1;
+}
+
+message ValidateResponse{
+    bool ok =1;
+    int32 id =2;
+    string username =3;
+    string accessToken = 4;
+    string refreshToken = 5;
+}
+message LoginResponse {
+        string accessToken = 1;
+        string refreshToken = 2;
+}
+
+message TokenRequest{
+    string refreshtoken = 1;
+}
+message TokenResponse{
+    string accesstoken =1;
+    string refreshtoken =2;
+}
+
+//Update user to professional
+
+message SignupUpdate{
+    bool isProfessional = 1;
+
+}
+message UpdateRequest{
+        int32 userId =1;
+        
+}
+message UpdateResponse{
+    SignupResponse user =1;
+}

@@ -1,0 +1,8 @@
+FROM locustio/locust:2.37.11
+
+# Install gRPC and protobuf
+RUN pip install grpcio grpcio-tools protobuf
+
+# Copy test files into the image
+COPY . /app
+WORKDIR /app

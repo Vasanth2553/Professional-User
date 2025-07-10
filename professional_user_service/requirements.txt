@@ -1,0 +1,11 @@
+Django>=4.2
+djangorestframework
+djangorestframework-simplejwt
+grpcio
+grpcio-tools
+psycopg2-binary
+PyJWT==2.10.1
+pytest
+pytest-django
+requests
+locust==2.37.11

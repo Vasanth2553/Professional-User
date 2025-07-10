@@ -1,0 +1,6 @@
+projectKey=Prouser
+serverUrl=http://localhost:9000
+serverVersion=25.6.0.109173
+dashboardUrl=http://localhost:9000/dashboard?id=Prouser
+ceTaskId=f2df02b0-0aa7-4a17-b126-7cb6f2edd0b3
+ceTaskUrl=http://localhost:9000/api/ce/task?id=f2df02b0-0aa7-4a17-b126-7cb6f2edd0b3

@@ -1,0 +1,70 @@
+# version: "3.9"
+services:
+  professional_service:
+    build: .
+    container_name: professional_service
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+    depends_on:
+      - professional_db
+    environment:
+      - DB_HOST=professional_db
+    env_file:
+      - .env.professional
+    networks:
+      - internal
+
+  professional_db:
+    image: postgres:15
+    container_name: professional_user_db
+    restart: always
+    environment:
+      POSTGRES_DB: professional_db
+      POSTGRES_USER: prouser
+      POSTGRES_PASSWORD: Professional@123
+    ports:
+      - "5433 :5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  authgrpc_db:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: userdb
+      POSTGRES_USER: grpcauth_users
+      POSTGRES_PASSWORD: grpc_password
+    volumes:
+      - authgrpc_data:/var/lib/postgresql/data
+    networks:
+      - internal
+    
+
+  authgrpc_backend:
+    image: rohithkumars123/grpc_auth:v1
+    depends_on:
+      - authgrpc_db
+    ports:
+      - "5003:5003"
+    environment:
+      - DB_HOST=authgrpc_db
+      - DB_PORT=5432
+      - DB_USER=grpcauth_users
+      - DB_PASS=grpc_password
+      - DB_NAME=userdb
+    networks:
+      - internal
+   
+
+volumes:
+  postgres_data:
+  authgrpc_data:
+
+networks:
+  internal:
